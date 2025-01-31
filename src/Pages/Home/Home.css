@@ -1,0 +1,44 @@
+/* Home.css */
+
+.home-container {
+    /* This ensures content is centered on larger screens and padded on mobile */
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  /* Make table horizontally scrollable on small screens */
+  .table-container {
+    overflow-x: auto; /* So the table is scrollable if needed */
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .table-custom {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Basic styling for table cells */
+  .table-custom td,
+  .table-custom th {
+    border: 1px solid #9ca3af; /* gray-400 or adjust as needed */
+    padding: 0.5rem;
+    text-align: left;
+    vertical-align: middle;
+  }
+  
+  /* Stripe effect for even rows (optional) */
+  .table-custom tr:nth-child(even) {
+    background-color: #f3f4f6; /* gray-100 or adjust as needed */
+  }
+  
+  /* Optional custom scrollbar styling for the table container */
+  .table-container::-webkit-scrollbar {
+    height: 6px;
+  }
+  .table-container::-webkit-scrollbar-thumb {
+    background-color: #9ca3af; /* gray-400 */
+    border-radius: 9999px;
+  }
+  

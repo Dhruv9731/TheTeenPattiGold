@@ -3,12 +3,12 @@ import React from "react";
 function Image({ imgpath }) {
   return (
     <>
-      <div className="relative w-full">
+      <div className="relative w-full flex justify-center items-center">
         {/* Image */}
         <img
           src={imgpath}
-          alt="Beautiful Landscape"
-          className="w-full h-[300px] md:h-[500px] object-cover"
+          alt="Play and Win"
+          className="w-xl h-[300px] md:h-[500px] object-contain"
         />
 
         {/* Overlay Content */}
@@ -17,10 +17,10 @@ function Image({ imgpath }) {
           <p className="text-lg md:text-xl mt-2">
             Play Teen Patti Gold and win real money.    
           </p> */}
-          {/* <button className="mt-4 bg-blue-500 px-6 py-2 rounded-lg text-white hover:bg-blue-600 transition">
+        {/* <button className="mt-4 bg-blue-500 px-6 py-2 rounded-lg text-white hover:bg-blue-600 transition">
             Learn More...
           </button> */}
-        </div>
+      </div>
       {/* </div> */}
     </>
   );

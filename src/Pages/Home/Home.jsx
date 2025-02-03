@@ -3,25 +3,142 @@ import Image from "../../Componants/Image/Image";
 import Keywords from "../../Componants/Keywords/Keywords";
 import { Link } from "react-router-dom";
 import "./Home.css"; // Custom CSS for table and container
+import {
+  FaDownload,
+  FaRupeeSign,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function Home() {
+  // Custom arrow components
+  const CustomPrevArrow = (props) => {
+    const { onClick } = props;
+    return (
+      <button className="custom-arrow prev-arrow" onClick={onClick}>
+        <FaChevronLeft />
+      </button>
+    );
+  };
+
+  const CustomNextArrow = (props) => {
+    const { onClick } = props;
+    return (
+      <button className="custom-arrow next-arrow" onClick={onClick}>
+        <FaChevronRight />
+      </button>
+    );
+  };
+
+  const carouselSettings = {
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    pauseOnHover: true,
+    arrows: true,
+    fade: true,
+    cssEase: "cubic-bezier(0.7, 0, 0.3, 1)",
+    customPaging: (i) => <div className="custom-dot"></div>,
+    beforeChange: (current, next) => {
+      const slides = document.querySelectorAll(".carousel-slide");
+      slides[next]?.classList.add("next-slide");
+      slides[current]?.classList.add("previous-slide");
+    },
+    afterChange: (current) => {
+      const slides = document.querySelectorAll(".carousel-slide");
+      slides.forEach((slide) => {
+        slide.classList.remove("next-slide", "previous-slide");
+      });
+    },
+    prevArrow: <CustomPrevArrow />,
+    nextArrow: <CustomNextArrow />,
+  };
+
+  const carouselImages = [
+    {
+      path: "./src/assets/Photos/main.jpg",
+      title: "Welcome to Teen Patti Gold",
+      subtitle: "Experience the Ultimate Gaming",
+    },
+    {
+      path: "./src/assets/Photos/bonus.jpg",
+      title: "Exclusive Bonuses",
+      subtitle: "Get Amazing Rewards Daily",
+    },
+    {
+      path: "./src/assets/Photos/1.jpg",
+      title: "Multiple Games",
+      subtitle: "Choose from 20+ Exciting Games",
+    },
+    {
+      path: "./src/assets/Photos/16.webp",
+      title: "Start Winning",
+      subtitle: "Play and Earn Real Cash",
+    },
+  ];
+
+  const carouselImages2 = [
+    {
+      path: "./src/assets/Photos/table.jpg",
+      title: "Welcome to Teen Patti Gold",
+      subtitle: "Experience the Ultimate Gaming",
+    },
+    {
+      path: "./src/assets/Photos/Sign in.jpg",
+      title: "Exclusive Bonuses",
+      subtitle: "Get Amazing Rewards Daily",
+    },
+    {
+      path: "./src/assets/Photos/teen.jpg",
+      title: "Multiple Games",
+      subtitle: "Choose from 20+ Exciting Games",
+    },
+    {
+      path: "./src/assets/Photos/howto.jpg",
+      title: "Start Winning",
+      subtitle: "Play and Earn Real Cash",
+    },
+  ];
+
   return (
-    <main className="home-container bg-gray-100 text-gray-900">
-      {/* Header Image */}
-      <section className="my-4">
-        <Image imgpath={"./src/assets/Photos/main.jpg"} />
+    <main className="home-container bg-gray-800 text-white rounded-lg">
+      <section className="carousel-section">
+        <div className="carousel-container">
+          <Slider {...carouselSettings}>
+            {carouselImages.map((image, index) => (
+              <div key={index} className="carousel-slide">
+                <div className="slide-content">
+                  <Image imgpath={image.path} />
+                  <div className="slide-text-overlay">
+                    <h2 className="slide-title">{image.title}</h2>
+                    <p className="slide-subtitle">{image.subtitle}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
       </section>
 
       {/* Main Title */}
       <section className="my-4">
         <p className="text-2xl sm:text-3xl font-bold mx-3 py-2 text-center sm:text-left">
-          Teen Patti Master Gold || तीन पत्ती गोल्ड || Bonus 200₹ || Withdraw
-          ₹100/-
+          Teen Patti Gold || तीन पत्ती गोल्ड || Bonus 200₹ || Withdraw ₹100/-
         </p>
       </section>
 
       {/* Table of Contents */}
-      <section className="border-2 border-gray-300 mx-4 bg-gray-200 rounded-2xl overflow-hidden">
+      <section
+        className="border-2 border-gray-300 mx-4 bg-gray-200 text-white rounded-2xl overflow-hidden"
+        style={{ backgroundColor: "#101828c7" }}
+      >
         <div className="p-4">
           <h3 className="text-xl sm:text-2xl underline underline-offset-4 font-semibold mb-2">
             Table of Contents
@@ -30,7 +147,7 @@ function Home() {
             Teen Patti Gold || तीन पत्ती गोल्ड || Bonus 200₹ || Withdraw ₹100/-
           </p>
           <p className="hover:text-gray-600 cursor-pointer mb-1">
-            1. About “Teen Patti Gold” Apk ?
+            1. About "Teen Patti Gold" Apk ?
           </p>
           <p className="hover:text-gray-600 cursor-pointer mb-1">
             2. Download Steps For Teen Patti Gold Application ?
@@ -67,10 +184,10 @@ function Home() {
             11. Teen Patti Gold Google Performance Keyword
           </p>
           <p className="hover:text-gray-600 cursor-pointer mb-1">
-            12. Teen Patti Gold FAQ’s
+            12. Teen Patti Gold FAQ's
           </p>
           <p className="hover:text-gray-600 cursor-pointer mb-1">
-            13. HOW TO “TEEN PATTI GOLD” ?
+            13. HOW TO "TEEN PATTI GOLD" ?
           </p>
           <p className="hover:text-gray-600 cursor-pointer mb-1">
             14. Is New Teen Patti Gold Safe ?
@@ -88,29 +205,29 @@ function Home() {
       </section>
 
       {/* Repeat Title & Image */}
-      <section className="my-4">
+      <section className="my-4 text-white">
         <p className="text-2xl sm:text-3xl font-bold mx-3 py-2 text-center sm:text-left">
-          Teen Patti Master Gold || तीन पत्ती गोल्ड || Bonus 200₹ || Withdraw
-          ₹100/-
+          Teen Patti Gold || तीन पत्ती गोल्ड || Bonus 200₹ || Withdraw ₹100/-
         </p>
       </section>
       <section className="my-4">
-        <Image imgpath={"./src/assets/Photos/main.jpg"} />
+        <Image imgpath={"./src/assets/Photos/17.png"} />
       </section>
 
       {/* Introduction Box */}
-      <section className="border-2 border-gray-300 mx-4 my-3 bg-gray-200 rounded-2xl p-4 text-gray-800">
+      <section
+        className="border-2 border-gray-300 mx-4 my-3 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
         <p className="mb-2">
-          Hello Friends, आपका Welcome Back To My New Post. आज में आप सभी के लिए
-          Best Application की बात करने वाला हु। इस App से Online Income कर
-          सकेंगे।
+          Hello Friends, Welcome Back To My New Post. आज में आप सभी के लिए Best
+          Application की बात करने वाला हु। इस App से आप Online Income कर सकेंगे।
         </p>
         <p className="mb-2">
-          इस Apk में मित्रो, कई सारे Earning करने के लिए Program Available दिए
-          गए है।
+          इस APK में मित्रो, कई सारे Earning करने के लिए Games दिए गए है।
         </p>
         <p className="mb-2">
-          ओर तो ओर मित्रो, इस App के अंदर आपको 20+ Game’s दिए गए है, इन सभी
+          ओर तो ओर मित्रो, इस App के अंदर आपको 20+ Game's दिए गए है, इन सभी
           Games को खेलकर Profit कर सकते है।
         </p>
         <p>
@@ -121,28 +238,46 @@ function Home() {
       </section>
 
       {/* About Teen Patti Gold Table */}
-      <section className="my-4 px-4">
-        <h2 className="text-xl sm:text-2xl underline underline-offset-4 py-2 font-bold text-gray-800">
-          About “Teen Patti Master Gold” Apk ?
+      <section
+        className="my-4 px-4 border-2 border-gray-300 rounded-lg text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
+        <h2 className="text-xl sm:text-2xl underline underline-offset-4 py-2 font-bold text-white">
+          About "Teen Patti Master Gold" Apk ?
         </h2>
 
-        <div className="table-container bg-white rounded-lg shadow p-3 mt-2">
-          <table className="table-custom text-sm sm:text-base">
+        <div className="table-container bg-gray-400 rounded-lg shadow p-3 mt-2">
+          <table className="table-custom text-sm sm:text-base border border-gray-400 bg-gray-800">
             <tbody>
               <tr>
-                <td className="font-semibold">Teen Patti Gold Apk Refer Code :-</td>
+                <td className="font-semibold">
+                  Teen Patti Gold Apk Refer Code :-
+                </td>
                 <td>5914838</td>
               </tr>
               <tr>
-                <td className="font-semibold">Teen Patti Gold Apk DOWNLOAD :-</td>
-                <td>APK / Google Play</td>
+                <td className="font-semibold">
+                  Teen Patti Gold Apk DOWNLOAD :-
+                </td>
+                <td>
+                  <Link
+                    to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74"
+                    className="hover:text-blue-600 hover:underline underline-offset-4"
+                  >
+                    APK / Google Play
+                  </Link>
+                </td>
               </tr>
               <tr>
-                <td className="font-semibold">Teen Patti Gold Apk FILE SIZE :-</td>
+                <td className="font-semibold">
+                  Teen Patti Gold Apk FILE SIZE :-
+                </td>
                 <td>65.91MB</td>
               </tr>
               <tr>
-                <td className="font-semibold">Gold Teen Pati App LANGUAGE :-</td>
+                <td className="font-semibold">
+                  Gold Teen Pati App LANGUAGE :-
+                </td>
                 <td>English, Hindi</td>
               </tr>
               <tr>
@@ -178,7 +313,9 @@ function Home() {
                 <td>5.00 out of 5 from 100 rating</td>
               </tr>
               <tr>
-                <td className="font-semibold">TeenPattiGold Sign Up Bonus :-</td>
+                <td className="font-semibold">
+                  TeenPattiGold Sign Up Bonus :-
+                </td>
                 <td>200₹ + 60% Refer Commission</td>
               </tr>
             </tbody>
@@ -186,12 +323,33 @@ function Home() {
         </div>
       </section>
 
-      <section className="my-4">
-        <Image imgpath={"./src/assets/Photos/main.jpg"} />
+      {/* <section className="my-4 flex flex-row justify-center items-center">
+        <Image imgpath={"./src/assets/Photos/table.jpg"} />
+        <Image imgpath={"./src/assets/Photos/Sign in.jpg"} />
+      </section> */}
+      <section className="carousel-section">
+        <div className="carousel-container">
+          <Slider {...carouselSettings}>
+            {carouselImages2.map((image, index) => (
+              <div key={index} className="carousel-slide">
+                <div className="slide-content">
+                  <Image imgpath={image.path} />
+                  <div className="slide-text-overlay">
+                    <h2 className="slide-title">{image.title}</h2>
+                    <p className="slide-subtitle">{image.subtitle}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
       </section>
 
       {/* Download Steps */}
-      <section className="my-4 px-4">
+      <section
+        className="border-2 border-gray-300 mx-4 my-4 bg-gray-200 rounded-2xl px-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
         <h2 className="text-2xl font-bold mb-2">
           Download Steps For Teen Patti Master Gold Application ?
         </h2>
@@ -199,11 +357,14 @@ function Home() {
           मित्रो, यदि आप Application को Download करना चाहते है, तो नीचे दिए गए
           Step के जरिए कीजए।
         </p>
-        <div className="mb-4">
-          <button className="mt-4 bg-blue-500 px-6 py-2 rounded-lg text-white hover:bg-blue-600 transition">
-            Download Now
-          </button>
-          <p className="font-bold mt-2">The Teen Patti Gold APK.</p>
+        <div className="mb-4 flex flex-col items-center">
+          <Link to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74">
+            <button className="mt-4 bg-blue-500 px-6 py-2 rounded-lg text-white hover:bg-blue-700 transition flex flex-row items-center justify-between">
+              <FaDownload className="mr-1" />
+              Download Now
+            </button>
+          </Link>
+          <p className="font-bold mt-2 italic">The Teen Patti Gold APK.</p>
         </div>
         <div className="mb-2">
           <p className="mb-1 hover:text-gray-600">
@@ -224,13 +385,16 @@ function Home() {
         </div>
         <p className="text-lg font-semibold text-red-600">
           Note :– अगर आप अपने Mobile Browser में पहली बार Apk Download कर रहे है
-          तो, इस App को Install करने के लिए “Unknown Source” विकल्प को Enable
+          तो, इस App को Install करने के लिए "Unknown Source" विकल्प को Enable
           करना होगा।
         </p>
       </section>
 
       {/* Register Section */}
-      <section className="my-6 px-4">
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl px-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
         <h2 className="text-2xl font-bold mb-2">
           Register In 3 Patti Master Gold ?
         </h2>
@@ -258,66 +422,126 @@ function Home() {
             <li className="list-disc ml-6">Verification Code</li>
             डाल दिजे।
           </p>
+          <div className="flex flex-col items-center justify-between mb-1">
+            <Link to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74">
+              <button className="mt-4 bg-blue-500 px-6 py-2 rounded-lg text-white hover:bg-blue-700 transition flex flex-row items-center justify-between">
+                <FaRupeeSign className="mr-1" />
+                Get Bonus
+              </button>
+            </Link>
+            <p className="text-sm font-semibold italic">The Teen Patti Gold</p>
+          </div>
           <p className="mb-1">
-            ऊपर दि गई Detail डालकर Confirm कर देना है। इन सभी Process करने के बाद
-            आपको Sign Up Bonus 200₹ मिल जाते है।
+            ऊपर दि गई Detail डालकर Confirm कर देना है। इन सभी Process करने के
+            बाद आपको Sign Up Bonus 200₹ मिल जाते है।
           </p>
         </div>
       </section>
 
       {/* Games Info */}
-      <section className="my-6 px-4">
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
         <h2 className="text-2xl font-bold mb-2">
           How Many Games Are There In This APK ?
         </h2>
         <p className="mb-1">
-          Teen Patti Gold में कोन कोन सी Game’s Available दि गई है ?
+          Teen Patti Gold में कोन कोन सी Game's Available दि गई है ?
         </p>
         <p className="mb-1">
-          App में 20+ Game’s दि गई है। आगे बात कर तो Teen Patti Gold में All
-          Games आसानी से खेलकर Winning कीजए। इस App में All Game’s कि List
-          नीचे दि गई है।
+          App में 20+ Game's दि गई है। आगे बात कर तो Teen Patti Gold में All
+          Games आसानी से खेलकर Winning कीजए। इस App में All Game's कि List नीचे
+          दि गई है।
         </p>
-        <div className="mt-4">
-          <Image imgpath={"./src/assets/Photos/main.jpg"} />
+        <div
+          className="mt-4"
+          style={{
+            backgroundColor: "#101828c7",
+            padding: "20px",
+            borderRadius: "10px",
+          }}
+        >
+          <Image imgpath={"./src/assets/Photos/howmany.jpg"} />
+        </div>
+        <div className="flex flex-col items-center justify-between mb-1">
+          <Link to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74">
+            <button className="mt-4 bg-blue-500 px-6 py-2 rounded-lg text-white hover:bg-blue-700 transition flex flex-row items-center justify-between">
+              <FaDownload className="mr-1" />
+              Download Now
+            </button>
+          </Link>
+          <p className="text-sm font-semibold italic">The Teen Patti Gold</p>
         </div>
       </section>
 
       {/* Daily Login Bonus */}
-      <section className="my-6 px-4">
-        <h2 className="text-2xl font-bold mb-2">Teen Patti Gold Daily Login Bonus</h2>
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
+        <h2 className="text-2xl font-bold mb-2">
+          Teen Patti Gold Daily Login Bonus
+        </h2>
         <p className="mb-1">
           रोजाना इस App में हमें Free Bonus मिलता है। जिसे Claim करके हम Games
           खेलने के लिए Use कर सकते है। आपको यह Free Bonus प्राप्त करने के लिए
           Teen Patti Gold को Daily Open करना है।
         </p>
         <p className="mb-1">
-          ओर Bonus Claim कर सकते है। हर दिन मिलने वाला Free Bonus Rupees अलग
-          अलग होता है।
+          ओर Bonus Claim कर सकते है। हर दिन मिलने वाला Free Bonus Rupees अलग अलग
+          होता है।
         </p>
+        <div className="flex flex-col items-center justify-between mb-1">
+          <button className="mt-4 bg-blue-500 px-6 py-2 rounded-lg text-white hover:bg-blue-700 transition">
+            Login
+          </button>
+          <p className="text-sm font-semibold italic">The Teen Patti Gold</p>
+        </div>
       </section>
 
       {/* Add Money Program */}
-      <section className="my-6 px-4">
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
         <h2 className="text-2xl font-bold mb-2">
           Add Money Program In Teen Patti Gold ?
         </h2>
         <p className="mb-2">
-          अगर आप लोग App के अंदर Money Add करना चाहते है, तो काफी आसानी कर
-          सकते है। Apk में मित्रो,Money Add करने के लिए Minimum 100₹ तक जुडा
-          सकते है। और Maximum 100000₹ जुड़ सकते है।
+          अगर आप लोग App के अंदर{" "}
+          <Link
+            to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74"
+            className="text-blue-600 underline underline-offset-4"
+          >
+            Money Add
+          </Link>{" "}
+          करना चाहते है, तो काफी आसानी कर सकते है। Apk में मित्रो,Money Add करने
+          के लिए Minimum 100₹ तक जुडा सकते है। और Maximum 100000₹ जुड़ सकते है।
         </p>
         <p className="mb-4">
-          ओर Friends, App में Deposit करने के लिए कोई भीं Application के
-          Methods से Payment कर सकते है। दोस्तो, अब आपको Money Add करने के लिए
-          नीचे दिए गए Steps के आधारित आसानी कर सकते है।
+          ओर Friends, App में Deposit करने के लिए कोई भीं Application के Methods
+          से Payment कर सकते है। दोस्तो, अब आपको Money Add करने के लिए नीचे दिए
+          गए Steps के आधारित आसानी कर सकते है।
         </p>
 
-        <Image imgpath={"./src/assets/Photos/main.jpg"} />
+        <img
+          src={"./src/assets/Photos/9.webp"}
+          alt="Play and Win"
+          className="w-xl h-[300px] md:h-[500px] object-contain"
+          style={{ aspectRatio: 16 / 9, width: "100%", borderRadius: "10px" }}
+        />
 
         <div className="mt-4">
           <li className="list-decimal ml-6 mb-1">
-            अपने Smart Phone में Teen Patti Gold को Open करे।
+            अपने Smart Phone में{" "}
+            <Link
+              to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74"
+              className="text-blue-600 font-semibold underline underline-offset-4"
+            >
+              TEEN PATTI GOLD
+            </Link>{" "}
+            APK को Open करे।
           </li>
           <li className="list-decimal ml-6 mb-1">
             यह Option आपको Right Side पर निचे की तरफ Corner पर आपको (Add Cash)
@@ -333,8 +557,8 @@ function Home() {
             डाले।
           </li>
           <li className="list-decimal ml-6 mb-1">
-            यह फिल करते ही आप फिर से Add Cash पर Click करते ही आप दुसरे Page
-            में चले जाएंगे।
+            यह फिल करते ही आप फिर से Add Cash पर Click करते ही आप दुसरे Page में
+            चले जाएंगे।
           </li>
           <li className="list-decimal ml-6 mb-1">
             वहा आपको Paytm, Phone पे, Google pay, Bhim, Amazon Pay और Other UPI
@@ -354,10 +578,22 @@ function Home() {
             इस तरह आपके Game Account में पैसा जुड़ जाएगा ।
           </li>
         </div>
+        <div className="flex flex-col items-center justify-between mb-1">
+          <Link to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74">
+            <button className="mt-4 bg-blue-500 px-6 py-2 rounded-lg text-white hover:bg-blue-700 transition flex flex-row items-center justify-between">
+              <FaRupeeSign className="mr-1" />
+              Add Money
+            </button>
+          </Link>
+          <p className="text-sm font-semibold italic">The Teen Patti Gold</p>
+        </div>
       </section>
 
       {/* Add Cash Offer */}
-      <section className="my-6 px-4">
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
         <h2 className="text-2xl font-bold mb-2">Add Cash Offer List</h2>
         <ul className="list-disc ml-6 space-y-1">
           <li>Add 1000₹ & Get 2% Bonus</li>
@@ -372,14 +608,23 @@ function Home() {
       </section>
 
       {/* Refer & Earn */}
-      <section className="my-6 px-4">
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
         <h2 className="text-2xl font-bold mb-2">
           Refer & Earn Program In Teen Patti Gold ?
         </h2>
         <ul className="list-decimal ml-6 space-y-1">
           <li>
-            सबसे पहेले आपको Home Page पर नीचे Left Side पर Refer & Earn Option
-            पर Click करे।
+            सबसे पहेले आपको Home Page पर नीचे Left Side पर{" "}
+            <Link
+              to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74"
+              className="text-blue-600 underline underline-offset-4 font-semibold"
+            >
+              Refer & Earn
+            </Link>{" "}
+            Option पर Click करे।
           </li>
           <li>ओर Referral करने के लिए Teen Patti Gold की Link Copy करिए।</li>
           <li>
@@ -392,23 +637,60 @@ function Home() {
             कर लेता है, तो आपको प्रति Invite पर 20₹ Bonus मिलते है।
           </li>
         </ul>
-        <p className="mt-2">And Also Earn 60% Of Friends Recharge</p>
+        <div className="flex flex-col items-center justify-between mb-1">
+          <Link to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74">
+            <button className="mt-4 bg-blue-500 px-6 py-2 rounded-lg text-white hover:bg-blue-700 transition flex flex-row items-center justify-between">
+              <FaRupeeSign className="mr-1" />
+              Refer Friend
+            </button>
+          </Link>
+          <p className="text-sm font-semibold italic">The Teen Patti Gold</p>
+        </div>
+        <strong className="mt-2 text-lg">
+          And Also Earn 60% Of Friends Recharge
+        </strong>
       </section>
 
       {/* Withdraw Process */}
-      <section className="my-6 px-4">
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{
+          backgroundColor:
+            "https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74101828c7",
+        }}
+      >
         <h2 className="text-2xl font-bold mb-2">
           Withdraw Process In Teen Patti Gold ?
         </h2>
         <p className="mb-2">
-          Teen Patti Gold में Win करने के बाद Withdraw करने के लिए नीचे दिए गए
-          Step को Follow कीजए।
+          Teen Patti Gold में <b>Win</b> करने के बाद{" "}
+          <Link
+            to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74"
+            className="text-blue-600 underline underline-offset-4 font-semibold"
+          >
+            Withdraw
+          </Link>{" "}
+          करने के लिए नीचे दिए गए Step को Follow कीजए।
         </p>
-        <Image imgpath={"./src/assets/Photos/main.jpg"} />
+        <img
+          src={"./src/assets/Photos/download.jpg"}
+          alt="Play and Win"
+          className="w-xl h-[300px] md:h-[500px] object-contain"
+          style={{ aspectRatio: 16 / 9, width: "100%", borderRadius: "10px" }}
+        />
+        <div className="flex flex-col items-center justify-between mb-1">
+          <Link to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74">
+            <button className="mt-4 bg-blue-500 px-6 py-2 rounded-lg text-white hover:bg-blue-700 transition flex flex-row items-center justify-between">
+              <FaRupeeSign className="mr-1" />
+              Withdraw Money
+            </button>
+          </Link>
+          <p className="text-sm font-semibold italic">The Teen Patti Gold</p>
+        </div>
         <ul className="list-decimal ml-6 mt-4 space-y-1">
           <li>
-            निकासी(Withdrawal) करने के लिए पहेले Right Side पर नीचे निकासी Button
-            पर Click करे।
+            निकासी(Withdrawal) करने के लिए पहेले Right Side पर नीचे निकासी
+            Button पर Click करे।
           </li>
           <li>फिर Withdraw करने के लिए दो Option मिलते है।</li>
           <p className="ml-6">
@@ -431,14 +713,19 @@ function Home() {
       </section>
 
       {/* VIP Bonuses */}
-      <section className="my-6 px-4">
-        <h2 className="text-2xl font-bold mb-2">VIP Bonuses In Teen PattiGold</h2>
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
+        <h2 className="text-2xl font-bold mb-2">
+          VIP Bonuses In Teen PattiGold
+        </h2>
         <ul className="list-disc ml-6 space-y-1">
           <li>
             <strong>More Sign In Bonus:</strong> यदि आप Teen Patti Gold में VIP
             Member बन जाते हैं, तो आप Daily App में Login करके Extra Daily Login
-            Bonus Earn कर पाएंगे। यह Bonus तब तक सक्रिय रहेगा जब तक आप App का Use
-            करेंगे, भले ही आप Games खेलना बंद कर दें। यदि आप कुछ Extra Bonus
+            Bonus Earn कर पाएंगे। यह Bonus तब तक सक्रिय रहेगा जब तक आप App का
+            Use करेंगे, भले ही आप Games खेलना बंद कर दें। यदि आप कुछ Extra Bonus
             चाहते हैं, तो VIP Member बनें।
           </li>
           <li>
@@ -447,8 +734,8 @@ function Home() {
             Member बनते हैं, तभी आप अपना Weekly Bonus प्राप्त कर सकते हैं।
           </li>
           <li>
-            <strong>Daily Bonus:</strong> यदि आप Teen Patti Gold Cashback में VIP
-            बन जाते हैं, तो आपको न केवल Daily और Weekly Bonus प्राप्त होंगे,
+            <strong>Daily Bonus:</strong> यदि आप Teen Patti Gold Cashback में
+            VIP बन जाते हैं, तो आपको न केवल Daily और Weekly Bonus प्राप्त होंगे,
             बल्कि आपको Apk से Monthly Bonus भी प्राप्त होगा।
           </li>
           <li>
@@ -460,13 +747,21 @@ function Home() {
       </section>
 
       {/* Keywords Component */}
-      <section className="my-6 px-4">
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
         <Keywords />
       </section>
 
       {/* FAQ Section */}
-      <section className="my-6 px-4">
-        <h2 className="text-2xl font-bold mb-2">Teen Patti Master Gold FAQ’s</h2>
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
+        <h2 className="text-2xl font-bold mb-2">
+          Teen Patti Master Gold FAQ's
+        </h2>
         <ul className="space-y-2">
           <li>
             <strong>Q1. Teen Patti Gold में कौन कौन सी Languages हैं?</strong>
@@ -545,12 +840,20 @@ function Home() {
       </section>
 
       {/* How To... */}
-      <section className="my-6 px-4">
-        <h2 className="text-2xl font-bold mb-2">HOW TO “TEEN PATTI MASTER GOLD” ?</h2>
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
+        <h2 className="text-2xl font-bold mb-2">
+          HOW TO "TEEN PATTI MASTER GOLD" ?
+        </h2>
         <ul className="list-disc ml-6 space-y-1">
           <li>
             HOW TO{" "}
-            <Link to="#" className="hover:text-blue-600 hover:underline">
+            <Link
+              to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74"
+              className="text-blue-600 underline underline-offset-4 font-semibold"
+            >
               Download
             </Link>{" "}
             TEEN PATTI GOLD?
@@ -563,23 +866,37 @@ function Home() {
           <li>HOW TO REFER & EARN IN TEEN PATTI GOLD?</li>
           <li>HOW TO WITHDRAW MONEY IN TEEN PATTI GOLD?</li>
           <li>HOW TO GET VIP BONUS IN TEEN PATTI GOLD?</li>
-          <li>HOW TO GET DAILY LOGIN BONUS IN TEEN PATTI GOLD?</li>
+          <li>
+            HOW TO GET DAILY{" "}
+            <Link
+              to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74"
+              className="text-blue-600 underline underline-offset-4 font-semibold"
+            >
+              Login
+            </Link>{" "}
+            BONUS IN TEEN PATTI GOLD?
+          </li>
           <li>HOW TO HAVE CUSTOMER SUPPORT IN TEEN PATTI GOLD?</li>
         </ul>
       </section>
 
       <section className="my-4">
-        <Image imgpath={"./src/assets/Photos/main.jpg"} />
+        <Image imgpath={"./src/assets/Photos/TeenPatti Moment.png"} />
       </section>
 
       {/* Is It Safe */}
-      <section className="my-6 px-4">
-        <h2 className="text-2xl font-bold mb-2">Is New Master Teen Patti Gold Safe</h2>
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
+        <h2 className="text-2xl font-bold mb-2">
+          Is New Master Teen Patti Gold Safe ?
+        </h2>
         <p className="mb-2">
-          यदि आपके कोई Question हैं, कि यह Application Verified होगा या नहीं,
-          तो हम आपको सूचित करते हैं कि यह Teen Patti Gold कई वर्षों से Market
-          में है और सभी को बहुत पसंद भी आया है। और हर एक व्यक्ति बहुत अच्छी
-          तरह से इस App में कमाता है।
+          यदि आपके कोई Question हैं, कि यह Application Verified होगा या नहीं, तो
+          हम आपको सूचित करते हैं कि यह Teen Patti Gold कई वर्षों से Market में
+          है और सभी को बहुत पसंद भी आया है। और हर एक व्यक्ति बहुत अच्छी तरह से
+          इस App में कमाता है।
         </p>
         <p className="mb-2">
           इसलिए आपको इस Application के अंदर भी एक नज़र डालनी चाहिए ताकि आप लोग
@@ -589,30 +906,35 @@ function Home() {
         <p>
           Friends, एक विचार अभी आपके Mind में चल रहा होगा कि यह App पर भरोसा
           किया जा सकता है या नहीं। अगर आप इस Question का हमारा Answer जानना
-          चाहते हैं, तो यह है कि इस App भरोसा किया जा सकता है। और इसका Reason
-          यह है, कि इस App बहुत लम्बे Time हो गया है। यह App पूरी तरह से सही
-          है और यह App 100% Trusted & Verified एपीके है।
+          चाहते हैं, तो यह है कि इस App भरोसा किया जा सकता है। और इसका Reason यह
+          है, कि इस App बहुत लम्बे Time हो गया है। यह App पूरी तरह से सही है और
+          यह App 100% Trusted & Verified एपीके है।
         </p>
       </section>
 
       {/* Tips & Tricks */}
-      <section className="my-6 px-4">
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
         <h2 className="text-2xl font-bold mb-2">
           Tips & Tricks Related To Teen Patti Master Gold
         </h2>
         <p className="mb-2">
           Friends, आप लोग भी किसी भी Game को खेलते वख्त जिस ने भी पहले उस Gaming
-          Application को खेला हो उस से Game के बारे में जरुर पुछ्ते है, जिसे Game
-          खेलने में आसानी रहे।
+          Application को खेला हो उस से Game के बारे में जरुर पुछ्ते है, जिसे
+          Game खेलने में आसानी रहे।
         </p>
         <p className="mb-2">
-          हम जब किसी अनुभवी के Tips मानकर Games को खेलते है, तो हमें कम
-          मुश्केली लगती है, और जितने भी आसानी रहते है। इसलिए निमनलिखित हम आपको
-          3 Patti Master Glod से सबंधित कुच Tips Or Tricks बताएंगे।
+          हम जब किसी अनुभवी के Tips मानकर Games को खेलते है, तो हमें कम मुश्केली
+          लगती है, और जितने भी आसानी रहते है। इसलिए निमनलिखित हम आपको 3 Patti
+          Master Glod से सबंधित कुच Tips Or Tricks बताएंगे।
         </p>
         <ul className="list-disc ml-6 space-y-1">
           <li>आप लोग जो भी Game खेले First उसके Rules समज लेना चाहिए।</li>
-          <li>आपको कोई भी Game में उतनी ही Bet लगानी चाहिए जीतना आप Loss जेल सके।</li>
+          <li>
+            आपको कोई भी Game में उतनी ही Bet लगानी चाहिए जीतना आप Loss जेल सके।
+          </li>
           <li>किसी भी Game की आदत नहीं लगनी चाहिए।</li>
           <li>एक Limit मे ही Games को खेलना चाहिए।</li>
           <li>
@@ -624,14 +946,26 @@ function Home() {
             करे, ताकि अगली Bet में आसानी रहे।
           </li>
         </ul>
+        <div className="flex flex-col items-center justify-between mb-1">
+          <Link to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74">
+            <button className="mt-4 bg-blue-500 px-6 py-2 rounded-lg text-white hover:bg-blue-700 transition flex flex-row items-center justify-between">
+              <FaRupeeSign className="mr-1" />
+              Start Earning
+            </button>
+          </Link>
+          <p className="text-sm font-semibold italic">The Teen Patti Gold</p>
+        </div>
       </section>
 
       <section className="my-4">
-        <Image imgpath={"./src/assets/Photos/main.jpg"} />
+        <Image imgpath={"./src/assets/Photos/19.png"} />
       </section>
 
       {/* Customer Care */}
-      <section className="my-6 px-4">
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
         <h2 className="text-2xl font-bold mb-2">
           Customer Care & Services Support Teen Patti Master Gold
         </h2>
@@ -642,13 +976,16 @@ function Home() {
           Problem को निकालने में मदद मिलेगी।
         </p>
         <p className="font-semibold text-lg text-red-600">
-          Note :– इस Game में वित्तिय जोखिम शामिल है। इस Game की लत लग सकती
-          है। कृपया अपनी जिम्मेदारी से ध्यान पुर्वक खेले। Only 18+
+          Note :– इस Game में वित्तिय जोखिम शामिल है। इस Game की लत लग सकती है।
+          कृपया अपनी जिम्मेदारी से ध्यान पुर्वक खेले। Only 18+
         </p>
       </section>
 
       {/* Conclusion */}
-      <section className="my-6 px-4">
+      <section
+        className="border-2 border-gray-300 mx-4 my-6 bg-gray-200 rounded-2xl p-4 text-white"
+        style={{ backgroundColor: "#101828c7" }}
+      >
         <h2 className="text-2xl font-bold mb-2">Conclusion</h2>
         <p className="mb-2">
           तो मित्रो, आज हमने आपके साथ एक छोटी सी Information दी, यह छोटी सी
@@ -662,9 +999,9 @@ function Home() {
           होगा।
         </p>
         <p className="mb-2">
-          आपको यह जरुर ध्यान रखना चाहिए की इसमें वित्तीय जोखिम शामिल है और
-          इसकी आदत भी लग सकती है। इसलिए App में आपको एक Limit में ही अपनी Hard
-          Money लगानी चाहिए।
+          आपको यह जरुर ध्यान रखना चाहिए की इसमें वित्तीय जोखिम शामिल है और इसकी
+          आदत भी लग सकती है। इसलिए App में आपको एक Limit में ही अपनी Hard Money
+          लगानी चाहिए।
         </p>
         <p className="mb-2">
           आप अपने Friends को यह Article का Link share करे जिन्हें Teen Patti /
@@ -672,17 +1009,20 @@ function Home() {
         </p>
         <p className="mb-2">
           हम अक्सर इस Website नए नऐ Teen Patti और Rummy Games की Information
-          लाते रहते है। ओर Friends अगर आपको नए नए Games के बारे में जानना
-          अच्छा लगता है, तो दोस्तों हमारे Article पर Daily Visit करे।
+          लाते रहते है। ओर Friends अगर आपको नए नए Games के बारे में जानना अच्छा
+          लगता है, तो दोस्तों हमारे Article पर Daily Visit करे।
         </p>
         <p>
-          ताकि आप लोगो को Latest Games से जुडी Information आपको मिलती रहे।
-          हमारे Article को Last तक पढने के लिए आप सब का बहुत – बहुत धन्यवाद।
+          ताकि आप लोगो को Latest Games से जुडी Information आपको मिलती रहे। हमारे
+          Article को Last तक पढने के लिए आप सब का बहुत – बहुत धन्यवाद।
         </p>
       </section>
 
       {/* Final Note */}
-      <section className="my-6 px-4 text-center sm:text-left">
+      <section
+        className="border-2 border-gray-300 text-white rounded-lg p-1 my-6 px-4 text-center sm:text-left"
+        style={{ backgroundColor: "#101828c7" }}
+      >
         <h2 className="text-xl sm:text-2xl font-bold">
           Thank you all for patiently reading our Article to the end
         </h2>

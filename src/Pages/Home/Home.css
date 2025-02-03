@@ -22,7 +22,7 @@
   /* Basic styling for table cells */
   .table-custom td,
   .table-custom th {
-    border: 1px solid #9ca3af; /* gray-400 or adjust as needed */
+    border: 1px solid #000000; /* gray-400 or adjust as needed */
     padding: 0.5rem;
     text-align: left;
     vertical-align: middle;
@@ -30,7 +30,7 @@
   
   /* Stripe effect for even rows (optional) */
   .table-custom tr:nth-child(even) {
-    background-color: #f3f4f6; /* gray-100 or adjust as needed */
+    background-color: #3d4451; /* gray-100 or adjust as needed */
   }
   
   /* Optional custom scrollbar styling for the table container */
@@ -41,4 +41,271 @@
     background-color: #9ca3af; /* gray-400 */
     border-radius: 9999px;
   }
+
+  /*----------------------------------*/
+  /* Carousel styling */
+/* ... existing styles ... */
+
+/* Enhanced Carousel Styling */
+.carousel-section {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1400px;
+  overflow: hidden;
+}
+
+.carousel-container {
+  position: relative;
+  margin: 20px auto;
+}
+
+.carousel-slide {
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-content {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.slide-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease-in-out;
+}
+
+.slide-text-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 20px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.slick-active .slide-text-overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.slide-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.slide-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Navigation Arrows */
+.slick-prev,
+.slick-next {
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.slick-prev {
+  left: 20px;
+}
+
+.slick-next {
+  right: 20px;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 24px;
+  opacity: 1;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+/* Custom Dots */
+.slick-dots {
+  bottom: 20px;
+  z-index: 1;
+}
+
+.custom-dot {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.slick-active .custom-dot {
+  background: white;
+  transform: scale(1.2);
+}
+
+/* Slide Animations */
+.carousel-slide.next-slide img {
+  transform: scale(1.1);
+}
+
+.carousel-slide.previous-slide img {
+  transform: scale(1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .slide-title {
+    font-size: 1.8rem;
+  }
+
+  .slide-subtitle {
+    font-size: 1rem;
+  }
+
+  .slick-prev,
+  .slick-next {
+    width: 40px;
+    height: 40px;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 20px;
+  }
+
+  .carousel-container {
+    margin: 10px auto;
+  }
+}
+
+/* Fade Animation */
+.slick-fade .slick-slide {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.slick-fade .slick-active {
+  opacity: 1;
+}
+
+/* Additional Animation Classes */
+@keyframes zoomInOut {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.slick-active .slide-content img {
+  animation: zoomInOut 10s infinite;
+}
+
+/* ... existing styles ... */
+
+/* Custom Arrow Styling */
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.custom-arrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev-arrow {
+  left: 20px;
+}
+
+.next-arrow {
+  right: 20px;
+}
+
+.custom-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hide arrows on mobile */
+@media (max-width: 768px) {
+  .custom-arrow {
+    width: 30px;
+    height: 30px;
+  }
+
+  .custom-arrow svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* Optional: Hide arrows when hovering outside the carousel */
+.carousel-section:not(:hover) .custom-arrow {
+  opacity: 0;
+}
+
+.carousel-section:hover .custom-arrow {
+  opacity: 1;
+}
+
+/* Animation for arrows */
+.custom-arrow {
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.carousel-section:hover .custom-arrow {
+  opacity: 1;
+}
+
+/* Ensure arrows are above the gradient overlay */
+.custom-arrow {
+  z-index: 3;
+}
+
+/* Optional: Add a subtle glow effect on hover */
+.custom-arrow:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Optional: Add active state */
+.custom-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
   

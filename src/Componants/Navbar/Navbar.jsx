@@ -8,7 +8,9 @@ import {
   FaTelegram,
   FaBars,
   FaTimes,
+  FaDownload,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -30,14 +32,29 @@ function Navbar() {
         {/* Right - Social Icons + Button */}
         <div className="hidden md:flex items-center space-x-4">
           <FaTwitter size={24} className="cursor-pointer hover:text-blue-400" />
-          <FaFacebook size={24} className="cursor-pointer hover:text-blue-600" />
-          <FaInstagram size={24} className="cursor-pointer hover:text-pink-500" />
+          <FaFacebook
+            size={24}
+            className="cursor-pointer hover:text-blue-600"
+          />
+          <FaInstagram
+            size={24}
+            className="cursor-pointer hover:text-pink-500"
+          />
           <FaYoutube size={24} className="cursor-pointer hover:text-red-500" />
-          <FaWhatsapp size={24} className="cursor-pointer hover:text-green-500" />
-          <FaTelegram size={24} className="cursor-pointer hover:text-blue-500" />
-          <button className="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">
-            Subscribe
-          </button>
+          <FaWhatsapp
+            size={24}
+            className="cursor-pointer hover:text-green-500"
+          />
+          <FaTelegram
+            size={24}
+            className="cursor-pointer hover:text-blue-500"
+          />
+          <Link to="https://www.earntp.com/m/jny6cm?f=w&p=wa&l=en&tp=m74">
+            <button className="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 flex flex-row items-center justify-between">
+              <FaDownload className="mr-1" />
+              Download
+            </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -56,19 +73,38 @@ function Navbar() {
               className="bg-gray-800 px-3 py-1 rounded-lg text-white focus:outline-none w-3/4"
             />
             <div>
-            <button className="bg-blue-500 px-4 py-1 rounded-lg hover:bg-blue-600">
-              Subscribe
-            </button>
-          </div>
+              <button className="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 flex flex-row items-center justify-between">
+                <FaDownload className="mr-1" />
+                Download
+              </button>
+            </div>
           </div>
           <div className="flex justify-between align-middle mt-5 ">
-            <FaTwitter size={24} className="cursor-pointer hover:text-blue-400" />
-            <FaFacebook size={24} className="cursor-pointer hover:text-blue-600" />
-            <FaInstagram size={24} className="cursor-pointer hover:text-pink-500" />
-            <FaYoutube size={24} className="cursor-pointer hover:text-red-500" />
-            <FaWhatsapp size={24} className="cursor-pointer hover:text-green-500" />
-            <FaTelegram size={24} className="cursor-pointer hover:text-blue-500" />
-          </div>    
+            <FaTwitter
+              size={24}
+              className="cursor-pointer hover:text-blue-400"
+            />
+            <FaFacebook
+              size={24}
+              className="cursor-pointer hover:text-blue-600"
+            />
+            <FaInstagram
+              size={24}
+              className="cursor-pointer hover:text-pink-500"
+            />
+            <FaYoutube
+              size={24}
+              className="cursor-pointer hover:text-red-500"
+            />
+            <FaWhatsapp
+              size={24}
+              className="cursor-pointer hover:text-green-500"
+            />
+            <FaTelegram
+              size={24}
+              className="cursor-pointer hover:text-blue-500"
+            />
+          </div>
         </>
       )}
     </nav>
